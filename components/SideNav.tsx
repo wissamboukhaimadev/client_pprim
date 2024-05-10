@@ -1,9 +1,20 @@
-import { navigation_items } from '@/utils/navigation'
+import { navigation_items, navigation_labels } from '@/utils/navigation'
 import { Progress } from '@mantine/core'
 import { Droplets, ThermometerSun } from 'lucide-react'
 import { motion } from "framer-motion"
+import { Dispatch, SetStateAction, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
-function SideNav() {
+
+type TSideNav = {
+    currentLabel: navigation_labels,
+    setCurrentLabel: Dispatch<SetStateAction<navigation_labels>>
+}
+
+function SideNav({ currentLabel, setCurrentLabel }: TSideNav) {
+
+    const router = useRouter()
+
     return (
         <motion.div
             className="side nav flex flex-col mt-3 w-1/6"
@@ -14,16 +25,16 @@ function SideNav() {
             <div className="p-5 bg-white rounded-xl  shadow-xl">
                 <p className="mb-1 text-">Menu</p>
                 <div>
-                    <div className="pl-5 mr-5 cursor-pointer">
-                        <p className="mb-1 p-1 ">Dashboard</p>
-                    </div>
                     {navigation_items.map((item, index) => (
-                        <div key={index} className="pl-5 mr-5 ml-2 cursor-pointer">
-                            <p className="mb-1 p-1 text-center">{item.label}</p>
+                        <div key={index} className="pl-5 mr-5 ml-2 cursor-pointer"
+                            onClick={() => {
+                                setCurrentLabel(item.label)
+                            }}>
+                            <p className={`mb-1 p-1  ${currentLabel === item.label && "bg-purple-500 rounded-r-xl text-white text-center"}`}>{item.label}</p>
                         </div>
                     ))}
-                    <div className="pl-5 mr-5 cursor-pointer">
-                        <p className="mb-1 ">Histrorique</p>
+                    <div className="pl-5 mr-5 cursor-pointer" onClick={() => router.push("/chart")}>
+                        <p className="mb-1 " >Histrorique</p>
                     </div>
                 </div>
             </div>
@@ -54,7 +65,7 @@ function SideNav() {
                 <Progress className="mt-3 " value={40} color="orange" />
             </div>
 
-        </motion.div>
+        </motion.div >
     )
 }
 
