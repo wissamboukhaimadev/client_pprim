@@ -69,7 +69,7 @@ export default function Home() {
             <div className="w-2/3 grid grid-cols-2 gap-4 mr-10">
 
               {cards_items.map((item, index) => (
-                <div className="mt-5 p-5 bg-white rounded-xl shadow-xl">
+                <div key={index} className="mt-5 p-5 bg-white rounded-xl shadow-xl">
                   <div className="flex justify-between">
                     <div>
                       <p className="font-bold text-lg" >{item.title}</p>
