@@ -1,29 +1,34 @@
 import { navigation_items } from '@/utils/navigation'
 import { Progress } from '@mantine/core'
 import { Droplets, ThermometerSun } from 'lucide-react'
-import React from 'react'
+import { motion } from "framer-motion"
 
 function SideNav() {
     return (
-        <div className="side nav flex flex-col mt-5 ">
-            <div className="p-5 bg-white rounded-xl w-56">
-                <p className="pb-3 text-">Menu</p>
+        <motion.div
+            className="side nav flex flex-col mt-3 w-1/6"
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ ease: "easeInOut", duration: 0.8 }}
+        >
+            <div className="p-5 bg-white rounded-xl  shadow-xl">
+                <p className="mb-1 text-">Menu</p>
                 <div>
-                    <div className="pl-5 mr-5">
-                        <p className="pb-2">Dashboard</p>
+                    <div className="pl-5 mr-5 cursor-pointer">
+                        <p className="mb-1 p-1 ">Dashboard</p>
                     </div>
                     {navigation_items.map((item, index) => (
-                        <div key={index} className="pl-5 mr-5">
-                            <p className="pb-2">{item.label}</p>
+                        <div key={index} className="pl-5 mr-5 ml-2 cursor-pointer">
+                            <p className="mb-1 p-1 text-center">{item.label}</p>
                         </div>
                     ))}
-                    <div className="pl-5 mr-5">
-                        <p className="pb-2">Histrorique</p>
+                    <div className="pl-5 mr-5 cursor-pointer">
+                        <p className="mb-1 ">Histrorique</p>
                     </div>
                 </div>
             </div>
 
-            <div className="mt-5 p-5 bg-white w-56 rounded-xl">
+            <div className="mt-5 p-5 bg-white  rounded-xl shadow-xl">
                 <div className="flex justify-between">
                     <div>
                         <p>Weather</p>
@@ -36,7 +41,7 @@ function SideNav() {
                 <Progress className="mt-3 " value={25} />
             </div>
 
-            <div className="mt-5 p-5 bg-white w-56 rounded-xl">
+            <div className="mt-5 p-5 bg-white  rounded-xl shadow-xl">
                 <div className="flex justify-between">
                     <div>
                         <p>Humidity</p>
@@ -49,7 +54,7 @@ function SideNav() {
                 <Progress className="mt-3 " value={40} color="orange" />
             </div>
 
-        </div>
+        </motion.div>
     )
 }
 
