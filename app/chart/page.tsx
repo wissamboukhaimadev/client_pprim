@@ -7,6 +7,12 @@ import BarChart from '@/components/charts/BarChart'
 import Header from '@/components/Header'
 import SideNav from '@/components/SideNav'
 import { navigation_labels } from '@/utils/navigation'
+import { DatePickerInput } from '@mantine/dates'
+
+import '@mantine/dates/styles.css';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 export default function Chart() {
@@ -15,13 +21,20 @@ export default function Chart() {
 
     const router = useRouter()
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         router.push('/');
-    //     }, 5000); // Trigger navigation every 10 seconds
+    useEffect(() => {
+        // const interval = setInterval(() => {
+        //     router.push('/');
+        // }, 5000); // Trigger navigation every 10 seconds
 
-    //     return () => clearInterval(interval);
-    // }, [router])
+        // return () => clearInterval(interval);
+
+        toast.success("data success", {
+            position: "bottom-right"
+        })
+    }, [router])
+
+    const [dateValue, setDateValue] = useState<Date | null>(null)
+
 
     return (
         <div
@@ -32,11 +45,31 @@ export default function Chart() {
 
                 <SideNav currentLabel={currentLabel} setCurrentLabel={setCurrentLabel} />
 
+                <div className='flex-grow mx-10 p-5 bg-white mt-5'>
 
-                <div className='flex-grow mx-10 p-5 bg-white mt-10'>
-                    <BarChart />
+                    <div>
+
+                        <div className='flex justify-between mb-2'>
+                            <div></div>
+                            <DatePickerInput
+                                placeholder="Select a date"
+                                value={dateValue}
+                                onChange={setDateValue}
+                                className='bg-red-200'
+                            />
+                        </div>
+
+                        <BarChart />
+                    </div>
                 </div>
             </div>
+
+            <ToastContainer
+                hideProgressBar
+                pauseOnHover={false}
+                autoClose={2000}
+                draggable
+            />
         </div>
     )
 }

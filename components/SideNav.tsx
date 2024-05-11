@@ -49,7 +49,7 @@ function SideNav({ currentLabel, setCurrentLabel }: TSideNav) {
                         <ThermometerSun />
                     </div>
                 </div>
-                <Progress className="mt-3 " value={25} />
+                <Progress className="mt-3 " value={25} size={"lg"} />
             </div>
 
             <div className="mt-5 p-5 bg-white  rounded-xl shadow-xl">
@@ -62,7 +62,7 @@ function SideNav({ currentLabel, setCurrentLabel }: TSideNav) {
                         <Droplets />
                     </div>
                 </div>
-                <Progress className="mt-3 " value={40} color="orange" />
+                <Progress className="mt-3 " value={40} color="orange" size={"lg"} />
             </div>
 
         </motion.div >

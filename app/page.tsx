@@ -16,6 +16,9 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion"
 import '@mantine/dates/styles.css';
 
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+
 
 
 export default function Home() {
@@ -25,17 +28,21 @@ export default function Home() {
   const [currentLabel, setCurrentLabel] = useState<navigation_labels>("General")
   const [dateValue, setDateValue] = useState<Date | null>(null)
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     router.push('/chart');
-  //   }, 5000);
+  useEffect(() => {
+    // const interval = setInterval(() => {
+    //   router.push('/chart');
+    // }, 5000);
 
-  //   return () => clearInterval(interval);
-  // }, [router])
+    // return () => clearInterval(interval);
+    toast.success("data success", {
+      position: "bottom-right"
+    })
+  }, [router])
 
   return (
     <div className="bg-pprimbg pt-5 px-5 h-screen">
       <Header />
+
       <div className="flex">
         <SideNav
           currentLabel={currentLabel}
@@ -82,6 +89,13 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <ToastContainer
+        hideProgressBar
+        pauseOnHover={false}
+        autoClose={2000}
+        draggable
+      />
     </div>
   );
 }
