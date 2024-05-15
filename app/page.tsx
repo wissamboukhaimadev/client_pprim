@@ -8,7 +8,7 @@ import CardsEtage2 from "@/components/cards/CardsEtage2";
 import CardsEtage3 from "@/components/cards/CardsEtage3";
 import CardsGeneral from "@/components/cards/CardsGeneral";
 import DognutChart from "@/components/charts/DognutChart";
-import { navigation_labels } from "@/utils/navigation";
+import { navigation_items, navigation_labels } from "@/utils/navigation";
 import { DatePickerInput } from "@mantine/dates";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -17,7 +17,6 @@ import { motion } from "framer-motion"
 import '@mantine/dates/styles.css';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -25,19 +24,33 @@ export default function Home() {
 
   const router = useRouter()
 
-  const [currentLabel, setCurrentLabel] = useState<navigation_labels>("General")
+  const [currentLabel, setCurrentLabel] = useState<navigation_labels>("Dashboard")
   const [dateValue, setDateValue] = useState<Date | null>(null)
 
-  useEffect(() => {
-    toast.success("data success", {
-      position: "bottom-right"
-    })
-    // const interval = setInterval(() => {
-    //   router.push('/chart');
-    // }, 5000);
 
-    // return () => clearInterval(interval);
-  }, [router])
+  useEffect(() => {
+
+
+
+    const state_interval = setInterval(() => {
+
+      setCurrentLabel(prevLabel => {
+        const currentIndex = navigation_items.findIndex(item => item.label === prevLabel);
+        const nextIndex = (currentIndex + 1) % navigation_items.length;
+        return navigation_items[nextIndex].label;
+      });
+
+      if (currentLabel == "Amphie") {
+        router.push('/chart');
+      }
+
+    }, 2000);
+
+    return () => {
+      clearInterval(state_interval)
+
+    };
+  }, [router, currentLabel])
 
   return (
     <div className="bg-pprimbg pt-5 px-5 ">
@@ -63,7 +76,7 @@ export default function Home() {
           </div>
 
           <div className="flex justify-between ">
-            <div className="w-2/3 grid grid-cols-2 gap-4 mr-10">
+            <div className="w-2/3 grid grid-cols-2 gap-4 mr-10 h-1/3">
               <SwitchCardsByLabel label={currentLabel} />
             </div>
 
@@ -90,12 +103,7 @@ export default function Home() {
         </div>
       </div>
 
-      <ToastContainer
-        hideProgressBar
-        pauseOnHover={false}
-        autoClose={2000}
-        draggable
-      />
+
     </div>
   );
 }
@@ -105,7 +113,7 @@ type TSwitchCardsByLabel = {
 }
 
 function SwitchCardsByLabel({ label }: TSwitchCardsByLabel) {
-  if (label === "General") {
+  if (label === "Dashboard") {
     return <CardsGeneral />
   } else if (label === "Etage 1") {
     return <CardsEtage1 />

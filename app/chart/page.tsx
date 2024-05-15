@@ -12,28 +12,31 @@ import { DatePickerInput } from '@mantine/dates'
 import '@mantine/dates/styles.css';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { Button, Popover, Select } from '@mantine/core'
 
 
 
 export default function Chart() {
 
-    const [currentLabel, setCurrentLabel] = useState<navigation_labels>("General")
+    const [currentLabel, setCurrentLabel] = useState<navigation_labels>("Dashboard")
+    const [startDateValue, setStartDateValue] = useState<Date | null>(null)
+    const [endDateValue, setEndDateValue] = useState<Date | null>(null)
+
+    const [departmentValue, setDepartmentValue] = useState<string | null>("")
+    const [showValue, setShowValue] = useState<string | null>("")
 
     const router = useRouter()
 
     useEffect(() => {
-        toast.success("data success", {
-            position: "bottom-right"
-        })
-        // const interval = setInterval(() => {
-        //     router.push('/');
-        // }, 5000); // Trigger navigation every 10 seconds
 
-        // return () => clearInterval(interval);
+        const interval = setInterval(() => {
+            router.push('/');
+        }, 5000);
+
+        return () => clearInterval(interval);
 
     }, [router])
 
-    const [dateValue, setDateValue] = useState<Date | null>(null)
 
 
     return (
@@ -50,13 +53,52 @@ export default function Chart() {
                     <div>
 
                         <div className='flex justify-between mb-2'>
-                            <div></div>
-                            <DatePickerInput
-                                placeholder="Select a date"
-                                value={dateValue}
-                                onChange={setDateValue}
-                                className='bg-red-200'
-                            />
+                            <div>
+
+                                <Popover>
+                                    <Popover.Target>
+                                        <Button>set properties</Button>
+                                    </Popover.Target>
+                                    <Popover.Dropdown>
+                                        <div className='flex'>
+                                            <Select
+                                                label="Set Department"
+                                                value={departmentValue}
+                                                onChange={setDepartmentValue}
+                                                placeholder="Pick value"
+                                                data={['Electricity', 'Biology', 'tech']}
+                                                comboboxProps={{ withinPortal: false }}
+
+                                            />
+                                            <Select
+                                                className='ml-5'
+                                                label="Set Values To Show"
+                                                value={showValue}
+                                                onChange={setShowValue}
+                                                placeholder="Pick value"
+                                                data={['Current', 'Tension']}
+                                                comboboxProps={{ withinPortal: false }}
+
+                                            />
+                                        </div>
+                                    </Popover.Dropdown>
+                                </Popover>
+                            </div>
+                            <div className='flex '>
+                                <DatePickerInput
+                                    placeholder="Select initial Date"
+                                    value={startDateValue}
+                                    onChange={setStartDateValue}
+                                    className='bg-red-200 '
+                                />
+                                <DatePickerInput
+                                    placeholder="Select final Date"
+                                    value={endDateValue}
+                                    onChange={setEndDateValue}
+                                    className='bg-red-200 ml-2'
+                                />
+                            </div>
+
                         </div>
 
                         <BarChart />
@@ -64,12 +106,7 @@ export default function Chart() {
                 </div>
             </div>
 
-            <ToastContainer
-                hideProgressBar
-                pauseOnHover={false}
-                autoClose={2000}
-                draggable
-            />
+
         </div>
     )
 }

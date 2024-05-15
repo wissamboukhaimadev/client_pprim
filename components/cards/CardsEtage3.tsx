@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 
 const cards_items: ICard[] = [
     {
-        title: "Tension Etage3",
+        title: "Tension general",
         value: 25,
         icon: <Plug />
     },
@@ -16,12 +16,22 @@ const cards_items: ICard[] = [
         icon: <ThermometerSun />
     },
     {
-        title: "Puissance",
+        title: "Puissance Active",
         value: 25,
         icon: <ThermometerSun />
     },
     {
         title: "Cos φ",
+        value: 25,
+        icon: <ThermometerSun />
+    },
+    {
+        title: "Puissance apparente",
+        value: 25,
+        icon: <ThermometerSun />
+    },
+    {
+        title: "Puissance reactive",
         value: 25,
         icon: <ThermometerSun />
     },

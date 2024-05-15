@@ -10,7 +10,7 @@ export default function LoginPage() {
     return (
 
         <div
-            className="bg-pprimbg pt-5 px-5 "
+            className="bg-pprimbg pt-5 px-5 h-screen"
         >
             <Header />
             <LoginComponent />
