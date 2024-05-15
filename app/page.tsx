@@ -29,18 +29,18 @@ export default function Home() {
   const [dateValue, setDateValue] = useState<Date | null>(null)
 
   useEffect(() => {
+    toast.success("data success", {
+      position: "bottom-right"
+    })
     // const interval = setInterval(() => {
     //   router.push('/chart');
     // }, 5000);
 
     // return () => clearInterval(interval);
-    toast.success("data success", {
-      position: "bottom-right"
-    })
   }, [router])
 
   return (
-    <div className="bg-pprimbg pt-5 px-5 h-screen">
+    <div className="bg-pprimbg pt-5 px-5 ">
       <Header />
 
       <div className="flex">

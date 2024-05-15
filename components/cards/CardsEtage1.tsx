@@ -20,7 +20,7 @@ const cards_items: ICard[] = [
         icon: <ThermometerSun />
     },
     {
-        title: "Cos",
+        title: "Cos φ",
         value: 25,
         icon: <ThermometerSun />
     },

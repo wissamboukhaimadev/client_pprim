@@ -21,7 +21,7 @@ export default function NotificationDrawer({ opened, close }: INotificationDrawe
         >
             <div className="mt-5">
                 {Array.from({ length: 20 }).map((item, index) => (
-                    <div className="mb-5">
+                    <div key={index} className="mb-5">
                         <Notification
                             color={index % 2 == 0 ? 'blue' : 'pink'}
                             key={index}

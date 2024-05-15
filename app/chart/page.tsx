@@ -22,15 +22,15 @@ export default function Chart() {
     const router = useRouter()
 
     useEffect(() => {
+        toast.success("data success", {
+            position: "bottom-right"
+        })
         // const interval = setInterval(() => {
         //     router.push('/');
         // }, 5000); // Trigger navigation every 10 seconds
 
         // return () => clearInterval(interval);
 
-        toast.success("data success", {
-            position: "bottom-right"
-        })
     }, [router])
 
     const [dateValue, setDateValue] = useState<Date | null>(null)
@@ -38,7 +38,7 @@ export default function Chart() {
 
     return (
         <div
-            className="bg-pprimbg pt-5 px-5 h-screen"
+            className="bg-pprimbg pt-5 px-5 "
         >
             <Header />
             <div className="flex">
